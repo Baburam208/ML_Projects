@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Prediction Form</title>
+</head>
+<body>
+    <h2>Loan Prediction Form</h2>
+    <form id="predictionForm">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="Age" required><br><br>
+
+        <label for="experience">Experience:</label>
+        <select id="experience" name="Experience">
+            <!-- Generate numbers 0 to 50 -->
+            <script>
+                for (let i = 0; i <= 50; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select><br><br>
+
+        <label for="income">Income:</label>
+        <input type="number" step="0.01" id="income" name="Income" required><br><br>
+
+        <label for="family">Family:</label>
+        <select id="family" name="Family">
+            <!-- Options for Family (1 to 6) -->
+            <script>
+                for (let i = 1; i <= 6; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select><br><br>
+
+        <label for="ccavg">CCAvg:</label>
+        <input type="number" step="0.01" id="ccavg" name="CCAvg" required><br><br>
+
+        <label for="mortgage">Mortgage:</label>
+        <select id="mortgage" name="Mortgage">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select><br><br>
+
+        <label for="online">Online:</label>
+        <select id="online" name="Online">
+            <option value="0">0</option>
+            <option value="1">1</option>
+        </select><br><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="Gender">
+            <option value="M">Male (M)</option>
+            <option value="F">Female (F)</option>
+            <option value="O">Other (O)</option>
+        </select><br><br>
+
+        <label for="homeOwnership">Home Ownership:</label>
+        <select id="homeOwnership" name="Home_Ownership">
+            <option value="Rent">Rent</option>
+            <option value="Home Mortgage">Home Mortgage</option>
+            <option value="Home Owner">Home Owner</option>
+        </select><br><br>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <script>
+        function submitForm() {
+            const formData = {
+                Age: parseInt(document.getElementById("age").value),
+                Experience: parseInt(document.getElementById("experience").value),
+                Income: parseFloat(document.getElementById("income").value),
+                Family: parseInt(document.getElementById("family").value),
+                CCAvg: parseFloat(document.getElementById("ccavg").value),
+                Mortgage: parseInt(document.getElementById("mortgage").value),
+                Online: parseInt(document.getElementById("online").value),
+                Gender: document.getElementById("gender").value,
+                Home_Ownership: document.getElementById("homeOwnership").value
+            };
+
+            fetch("http://localhost:8000/predict", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => alert("Response: " + JSON.stringify(data)))
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
