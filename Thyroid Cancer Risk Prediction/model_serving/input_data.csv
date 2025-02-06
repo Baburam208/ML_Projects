@@ -1,0 +1,2 @@
+Age,Gender,Country,Ethnicity,Family_History,Radiation_Exposure,Iodine_Deficiency,Smoking,Obesity,Diabetes,TSH_Level,T3_Level,T4_Level,Nodule_Size,Thyroid_Cancer_Risk
+68,1,8,0,0,0,0,1,1,0,4.0,0.98,5.52,0.02,2

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thyroid Cancer Prediction</title>
+    <script>
+        async function predict() {
+            const formData = {
+                Age: parseInt(document.getElementById("Age").value),
+                Gender: document.getElementById("Gender").value,
+                Country: document.getElementById("Country").value,
+                Ethnicity: document.getElementById("Ethnicity").value,
+                Family_History: document.getElementById("Family_History").value,
+                Radiation_Exposure: document.getElementById("Radiation_Exposure").value,
+                Iodine_Deficiency: document.getElementById("Iodine_Deficiency").value,
+                Smoking: document.getElementById("Smoking").value,
+                Obesity: document.getElementById("Obesity").value,
+                Diabetes: document.getElementById("Diabetes").value,
+                TSH_Level: parseFloat(document.getElementById("TSH_Level").value),
+                T3_Level: parseFloat(document.getElementById("T3_Level").value),
+                T4_Level: parseFloat(document.getElementById("T4_Level").value),
+                Nodule_Size: parseFloat(document.getElementById("Nodule_Size").value),
+                Thyroid_Cancer_Risk: document.getElementById("Thyroid_Cancer_Risk").value
+            };
+
+            const response = await fetch("/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            });
+            
+            const result = await response.json();
+            document.getElementById("result").innerText = "Diagnosis: " + result.Diagnosis;
+        }
+    </script>
+</head>
+<body>
+    <h2>Thyroid Cancer Prediction</h2>
+    <form onsubmit="event.preventDefault(); predict();">
+        Age: <input type="number" id="Age" required><br>
+        Gender: <input type="text" id="Gender" required><br>
+        Country: <input type="text" id="Country" required><br>
+        Ethnicity: <input type="text" id="Ethnicity" required><br>
+        Family History: <input type="text" id="Family_History" required><br>
+        Radiation Exposure: <input type="text" id="Radiation_Exposure" required><br>
+        Iodine Deficiency: <input type="text" id="Iodine_Deficiency" required><br>
+        Smoking: <input type="text" id="Smoking" required><br>
+        Obesity: <input type="text" id="Obesity" required><br>
+        Diabetes: <input type="text" id="Diabetes" required><br>
+        TSH Level: <input type="number" step="0.01" id="TSH_Level" required><br>
+        T3 Level: <input type="number" step="0.01" id="T3_Level" required><br>
+        T4 Level: <input type="number" step="0.01" id="T4_Level" required><br>
+        Nodule Size: <input type="number" step="0.01" id="Nodule_Size" required><br>
+        Thyroid Cancer Risk: <input type="text" id="Thyroid_Cancer_Risk" required><br>
+        <button type="submit">Predict</button>
+    </form>
+    <div id="result"></div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+dataset link: https://www.kaggle.com/datasets/ankushpanday1/thyroid-cancer-risk-prediction-dataset/data
+
+About Dataset
+=============
+This dataset contains 212,691 records with 23 attributes, simulating real-world thyroid cancer risk factors.
+It is intentionally towards certain ethnicities, countries, and risk factors such as radiation exposure, 
+iodine deficiency, and family history. The dataset can be used for machine learning modeling, bias detection, 
+fairness analysis, and medical research simulations.
